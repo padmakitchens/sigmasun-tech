@@ -120,7 +120,7 @@ function PdfCanvas({ src }: { src: string }) {
   return (
     <>
       <div
-        className="flex max-h-[68vh] w-full justify-center overflow-auto rounded-lg bg-white p-2 select-none"
+        className="mx-auto flex aspect-[1/1.414] max-h-[68vh] w-full max-w-[500px] items-center justify-center overflow-auto rounded-lg bg-white p-2 select-none"
         onContextMenu={(e) => e.preventDefault()}
         style={{ userSelect: "none" }}
       >
@@ -134,7 +134,10 @@ function PdfCanvas({ src }: { src: string }) {
             {error}
           </div>
         )}
-        <canvas ref={canvasRef} className={loading || error ? "hidden" : ""} />
+        <canvas
+          ref={canvasRef}
+          className={`h-full w-full object-contain ${loading || error ? "hidden" : ""}`}
+        />
       </div>
 
       <div className="flex items-center gap-4">
