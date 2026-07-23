@@ -47,8 +47,8 @@ export default function Header() {
         scrolled ? "shadow-[var(--shadow-sm)]" : ""
       }`}
     >
-      <div className="mx-auto flex h-full max-w-[1280px] items-center justify-between px-4 sm:px-6 lg:px-10">
-        <Link href="/" className="logo-group flex items-center gap-2">
+      <div className="mx-auto grid h-full max-w-[1400px] grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-12">
+        <Link href="/" className="logo-group flex items-center gap-2 justify-self-start">
           <Image
             src="/sigmasunlogo.webp"
             alt="Sigmasun Technologies - Light of Innovations"
@@ -76,7 +76,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
+        <nav className="hidden items-center justify-self-center gap-6 lg:flex xl:gap-8">
           {NAV_LINKS.map((link) => {
             const isActive =
               link.href === "/" ? pathname === "/" : pathname?.startsWith(link.href);
@@ -97,7 +97,7 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 justify-self-end">
           <Link
             href="/contact"
             className="hidden items-center gap-2 rounded-full bg-[var(--color-primary)] px-6 py-3 text-xs font-medium uppercase tracking-wide text-white shadow-[var(--shadow-cta)] transition-all duration-[var(--duration-fast)] hover:scale-[1.02] hover:bg-[var(--color-primary-hover)] lg:inline-flex"

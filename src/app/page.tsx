@@ -1,6 +1,20 @@
+import fs from "fs";
+import path from "path";
+import Image from "next/image";
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
+import HeroBackgroundSlider from "@/components/HeroBackgroundSlider";
 import { projects, featuredProjectSlugs } from "@/data/projects";
+
+const clientLogosDir = path.join(process.cwd(), "public", "our-clients");
+const clientLogos = fs
+  .readdirSync(clientLogosDir)
+  .filter((file) => file.endsWith(".webp") && !file.includes("(1)"))
+  .sort((a, b) => {
+    const numA = parseInt(a.match(/clients-(\d+)-/)?.[1] ?? "0", 10);
+    const numB = parseInt(b.match(/clients-(\d+)-/)?.[1] ?? "0", 10);
+    return numA - numB;
+  });
 
 const DIVISIONS = [
   {
@@ -31,8 +45,9 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-[linear-gradient(180deg,#FFFFFF_0%,#F5F5F5_100%)] px-4 py-16 sm:px-6 lg:px-10 lg:py-24">
-        <div className="mx-auto flex max-w-[1280px] flex-col items-start gap-6">
+      <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 lg:px-10 lg:py-24">
+        <HeroBackgroundSlider />
+        <div className="mx-auto flex min-h-[420px] max-w-[1280px] flex-col items-start justify-center gap-6 lg:min-h-[560px]">
           <span className="animate-fade-up rounded-full border border-[var(--color-primary)] px-4 py-1 text-xs font-bold uppercase tracking-wide text-[var(--color-primary)]">
             Pune, India &middot; Since 2012
           </span>
@@ -108,20 +123,44 @@ export default function Home() {
       {/* Featured projects */}
       <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-[1280px]">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
-              Featured Projects
-            </h2>
+          <h2 className="text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
+            Featured Projects
+          </h2>
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </div>
+          <div className="mt-10 flex justify-center">
             <Link
               href="/projects"
-              className="text-sm font-medium uppercase tracking-wide text-[var(--color-primary)] transition-colors hover:text-[var(--color-primary-hover)]"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-primary)] px-8 py-4 text-sm font-medium uppercase tracking-wide text-[var(--color-primary)] transition-all duration-[var(--duration-fast)] hover:bg-[var(--color-surface)] hover:border-[var(--color-primary-hover)] hover:text-[var(--color-primary-hover)]"
             >
               View All Projects &rarr;
             </Link>
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+        </div>
+      </section>
+
+      {/* Our Clients */}
+      <section className="bg-[var(--color-surface)] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <h2 className="text-center text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
+            Trusted by Leading Brands
+          </h2>
+          <div className="mt-10 grid grid-cols-3 items-center justify-items-center gap-6 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7">
+            {clientLogos.map((file) => (
+              <div
+                key={file}
+                className="relative h-16 w-full grayscale transition-all duration-[var(--duration-normal)] hover:-translate-y-0.5 hover:grayscale-0"
+              >
+                <Image
+                  src={`/our-clients/${file}`}
+                  alt="Client logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             ))}
           </div>
         </div>
