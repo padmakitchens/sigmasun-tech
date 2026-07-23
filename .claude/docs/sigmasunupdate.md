@@ -122,6 +122,27 @@ discription :
 title :
 discription :
 
+### machinevision
+public/Application/machineversion/convery-belt-vision.jpg
+title :
+discription :
+
+public/Application/machineversion/convery-machine-vision-1.mp4
+title :
+discription :
+
+public/Application/machineversion/flatness-testing-machine-machine-vision.jpg
+title :
+discription :
+
+public/Application/machineversion/part-inspection-system-1.jpg
+title :
+discription :
+
+public/Application/machineversion/part-inspection-system-2.jpg
+title :
+discription :
+
 ## Manufacturing Facility
 
 /Manufacturing%20Facility/PCB-yv100-1.jpeg
