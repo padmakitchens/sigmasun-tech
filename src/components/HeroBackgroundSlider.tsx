@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 
 const SLIDES = [
   "/Exibition/exi5.png",
-  "/Manufacturing%20Facility/manufacturing_facility-embedded_electronics.jpeg",
-  "/Manufacturing%20Facility/PCB_yv100_1.jpeg",
-  "/Application/laboratoryequip/membrane_casting_machine2.jpeg",
+  "/Manufacturing-Facility/manufacturing-facility-embedded-electronics-1.jpg",
+  "/Manufacturing-Facility/mechanical-PCB_yv100_1.jpeg",
+  "/Application/laboratoryequip/membranecasting3.jpeg",
 ];
 
 export default function HeroBackgroundSlider() {

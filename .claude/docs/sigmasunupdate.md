@@ -238,3 +238,151 @@ https://www.youtube.com/watch?v=dyGy4pnRcqI
 title :
 discription :
 
+
+---
+
+# Prompt: Execute Second Client Review Updates & Site Overhaul for Sigmasun Technologies
+
+Use this prompt directly with Claude Code to implement all client review changes, layout enhancements, interactivity upgrades, content updates, and page redesigns.
+
+---
+
+## 1. Objective
+Refine and transform the **Sigmasun Technologies** website according to feedback from the second client review. This update includes promoting the brand color (`#c9a227` / `#F67011`) to primary status, doubling header logo dimensions, switching header typography to Inter, implementing industry-categorized mega-dropdowns, overhauling the homepage with interactive process & testimonial sections, creating a card-stacking experience for Applications, adding video grid showcases, enhancing Manufacturing Facilities capabilities, updating Projects data, and redesigning the Contact and About Us pages to match the approved prior designs (`https://sigmasun-technologies.vercel.app/`).
+
+---
+
+## 2. Scope of Files to Modify & Create
+You will modify and update these core project files:
+*   **Modify** `src/app/globals.css` — Promote `#c9a227` / `#F67011` to primary brand status and refine interactive utility classes, animations, and Inter typography tokens.
+*   **Modify** `src/components/Header.tsx` — Double header logo size, set font to Inter, and implement the industry-categorized navigation dropdown inspired by `c:/Users/judob/dev/dev26/sunsigma/.claude/docs/reference/nav-dropdown.png`.
+*   **Modify** `src/app/page.tsx` — Complete Homepage overhaul: Stats counter below Hero, "Trusted by Leading Brands" logo marquee, "Who We Are" section, interactive 5-step "How It Works" workflow, sliding projects carousel with contrasting backgrounds, authentic client testimonials slider, and a high-impact bottom CTA.
+*   **Modify** `src/app/applications/page.tsx` — Overhaul Application page into a card-stacking sticky scroll design with interactive image/video carousels, hover focus states, navigation overlays, and mapped catalog data from `.claude/docs/sigmasunupdate.md`.
+*   **Modify** `src/app/projects/page.tsx` — Maintain approved project card layout while updating all image mappings, titles, tags, and detailed descriptions based on `.claude/docs/sigmasunupdate.md`.
+*   **Modify** `src/app/manufacturing-facilities/page.tsx` — Structure dropdown navigation for (1) Embedded Systems and (2) Mechanical Facility. Create an enhanced visual capabilities section featuring dedicated cards for each capability.
+*   **Modify** `src/app/videos/page.tsx` — Embed the main YouTube video (`https://www.youtube.com/watch?v=dyGy4pnRcqI`) in a hero player at the top, and render a dynamic grid of all videos from `public/Videos/` with formatted labels and playback modal below.
+*   **Modify** `src/app/case-study/page.tsx` — Retain approved case study layout, ensuring inline PDF preview canvas scales cleanly and opens full-screen preview mode on click.
+*   **Modify** `src/app/exhibitions/page.tsx` — Retain approved gallery structure.
+*   **Modify** `src/app/about-us/page.tsx` — Overhaul page structure inspired by `https://sigmasun-technologies.vercel.app/about` featuring "Our Story" timeline, "Who We Are" strength cards, redesigned Mission & Vision cards, "Trusted Industries" marquee, and a high-impact CTA section.
+*   **Modify** `src/app/contact/page.tsx` — Redesign Contact page matching `https://sigmasun-technologies.vercel.app/contact` with interactive form inputs, address & contact information cards, and embedded map container.
+
+---
+
+## 3. Required Context & Data Sources
+Before writing code, inspect and read:
+1.  `c:/Users/judob/dev/dev26/sunsigma/.claude/docs/sigmasunupdate.md` — Authoritative data matrix for Application image titles, descriptions, project updates, facility descriptions, and video URLs.
+2.  `c:/Users/judob/dev/dev26/sunsigma/.claude/docs/reference/nav-dropdown.png` — Structural and visual reference for navigation mega-dropdown design.
+3.  `c:/Users/judob/dev/dev26/sunsigma/.claude/docs/design-system.md` — Site theme tokens, color scales, and typography rules.
+4.  `c:/Users/judob/dev/dev26/sunsigma/.claude/docs/sigmasuncontext.md` — Existing workspace architecture and asset mappings.
+
+---
+
+## 4. Implementation Instructions by Feature & Page
+
+### A. Global Design System & Primary Color Promotion (`src/app/globals.css`)
+*   **Primary Brand Color Shift**: Elevate `#c9a227` (Brand Gold/Orange) and primary orange `#F67011` to be used **frequently as primary brand colors** across primary CTA buttons, active navigation indicators, key metrics, accent borders, subtle glows, badge highlights, and section headers.
+*   **Inter Typography**: Ensure `Inter` font is integrated and applied across header navigation elements and key display headings.
+*   **Micro-Animations**: Add CSS utility classes for smooth hover lifts, glassmorphism overlays (`backdrop-blur-md`), sliding card transitions, and glowing border highlights.
+
+### B. Header Navigation & Mega-Dropdown (`src/components/Header.tsx`)
+*   **Logo Resizing**: Increase the header logo size to double its current dimensions (`h-14 lg:h-16` or equivalent proportions).
+*   **Font**: Apply `font-sans` / `Inter` font family strictly to all navigation menu items, dropdowns, and button copy.
+*   **Dropdown Design (`c:/Users/judob/dev/dev26/sunsigma/.claude/docs/reference/nav-dropdown.png`)**:
+    *   Redesign the dropdown trigger menus to mirror the clean layout structure of `nav-dropdown.png`.
+    *   **Applications Dropdown**: Categorize links by industry type as defined in `sigmasunupdate.md` (Aeronautical, Laboratory Equipment, Laser Marking System, Industry 4.0, Dam Instrumentation, Healthcare, Defense System, Embedded Electronics, Robotic Welding, Robot Pick, Food & Pharma, Industrial, Machine Vision).
+    *   **Manufacturing Facilities Dropdown**: Divide into two clear sub-categories: (1) Embedded Systems / Electronics and (2) Mechanical Facility.
+    *   Ensure smooth hover slide-down animations and high-contrast readable link labels with gold accent bullet/hover states.
+
+### C. Homepage Complete Overhaul (`src/app/page.tsx`)
+Replace static/dull sections with rich, interactive, high-converting modules:
+1.  **Stats Counter Section (Below Hero)**:
+    *   Position directly below the Hero section.
+    *   Include animated count-up metrics: `100+` Custom SPM Machines Built, `12+` Years Industry Experience, `50+` Enterprise Clients, `100%` Custom Engineering & In-House R&D.
+2.  **"Trusted by Leading Brands" Marquee**:
+    *   Continuous smooth infinite logo slider rendering all WebP client logos from `public/our-clients/`.
+3.  **"Who We Are" Section**:
+    *   Interactive split layout showcasing Sigmasun's core identity, engineering values, and Pune-based manufacturing capability.
+4.  **Interactive 5-Step "How It Works" Workflow**:
+    *   Visual step-by-step engineering journey: (1) Client Consultation & Feasibility -> (2) 3D CAD & Controller Design -> (3) Precision Machining & PCB Fabrication -> (4) Rigorous Assembly & Testing -> (5) Turnkey Deployment & Support.
+5.  **Sliding Projects Showcase**:
+    *   Replace static project grid with a full-width sliding project carousel set against contrasting dark/vibrant brand backgrounds (`bg-[#020003]` or deep gold accent background) with smooth slide controls and project details.
+6.  **Authentic Client Testimonials Carousel**:
+    *   Create an interactive testimonial slider taking real testimonials from `https://sigmasuntechnologies.com/` highlighting client satisfaction, quality assurance, and project delivery.
+7.  **High-Impact Conversion CTA Section**:
+    *   A prominent full-width CTA band at the bottom of the page in primary brand coloring (`#c9a227` / `#F67011`), featuring quick contact triggers leading directly to `/contact`.
+
+### D. Applications Page — Card Stacking & Carousel (`src/app/applications/page.tsx`)
+*   **Card Stacking Layout**: Implement a sticky/overlapping card stack user experience where cards stack over each other as the page scrolls down, keeping industry headers visible.
+*   **Card Focus & Interaction**: Hovering or clicking on a card triggers a focus transition, elevating the card and expanding its detailed description.
+*   **Media Carousel in Cards**:
+    *   Embed an interactive image/video carousel inside each application card.
+    *   Features: Auto-advance slideshow, pause-on-hover, subtle overlay dots/arrows for manual navigation, and lightbox view on click.
+*   **Exact Data Mapping**: Use the exact directory structure, titles, and descriptions from `.claude/docs/sigmasunupdate.md` for all industries:
+    *   *Aeronautical*: 75 Hp Blower With Random Velocity Programme (`/Application/aeronautic/airturbine.jpeg`).
+    *   *Laboratory Equipment*: Membrane Casting Machine, Flow Measurement Bench, Membrane Casting Knife.
+    *   *Laser Marking System*: Laser Marking, Table Top Laser Marking Machine.
+    *   *Industry 4.0*: Conveyor belt for Industry 4.0, Engine Head Laser Marking.
+    *   *Dam Instrumentation*: Vibrating Wire Sensor Testing Device, Custom PCB board.
+    *   *Healthcare*: Orthopedic Table (`ortho1.jpg`, `ortho2.jpg`).
+    *   *Defense System*: Drone With Payload, Ground Penetrating Radar, Bathymetry with Echo Sounder, Extent Arm Drone.
+    *   *Embedded Electronics*: Custom PCB board, Microprocessor for Dam Monitor, Circuit Diagram for PCB.
+    *   *Robotic Welding*: Robotic Welding video, Turntable for automobile.
+    *   *Robot Pick*: Robotic Welding Fixtures, Solid State Laser Welding Machines.
+    *   *Food & Pharma*: Gas monitoring system, Gas Leaking Detection System, Weight Checker System, Food Production Machine, Strapping Machine.
+    *   *Industrial*: Radiator Leak Test Machine, Spring Tension Measurement Machine, Engine Head Laser Marking, Headlamp Testing Device, Large Cylindrical Industrial Tank, Online Thickness Measurement System, Automatic Sort Conveyor, Conveyor Weight Control.
+    *   *Machine Vision*: Conveyor Belt Vision System, Flatness Testing Machine Vision, Part Inspection System.
+
+### E. Projects Page Data Refresh (`src/app/projects/page.tsx`)
+*   Maintain the approved project page layout.
+*   Update all project cards, titles, image paths, filter categories, and detailed descriptions according to the specifications in `.claude/docs/sigmasunupdate.md`. Refine descriptions to maintain professional B2B engineering tone.
+
+### F. Manufacturing Facilities Page (`src/app/manufacturing-facilities/page.tsx`)
+*   Structure into 2 primary facility sections:
+    1.  **Embedded Electronics Facility**: Highlight PCB assembly, microprocessor programming, and testing equipment using images from `/Manufacturing-Facility/manufacturing-facility-embedded-electronics-1.jpg` through `5.jpg`.
+    2.  **Mechanical Facility**: Highlight mechanical fabrication, CNC machining, and assembly tooling using `/Manufacturing-Facility/mechanical-PCB_yv100_1.jpeg` and `mechanical-table-top-laser-marking-machine-mark-and-tracebility-1.png`.
+*   **Enhanced Capabilities Section**: Build a visual capabilities grid where each capability has 1 high-resolution image, descriptive title, key specifications, and a subtle zoom on hover effect.
+
+### G. Videos Showcase Page (`src/app/videos/page.tsx`)
+*   **Featured Hero Video Player**: Embed the main YouTube video (`https://www.youtube.com/watch?v=dyGy4pnRcqI`) at the top of the page in a cinematic responsive container with custom play controls overlay and summary.
+*   **Video Grid**: Display a clean grid showcasing all video files found under `public/Videos/` (and application MP4 clips).
+*   **Video Labels**: Derive clean titles from filenames (e.g. `robotic-welding-vid-1.mp4` -> "Robotic Welding System Demonstration", `Radiator-leak-test-machine-vid.mp4` -> "Radiator Leak Testing Operation"). Include inline video playback modal on click.
+
+### H. Case Study & Exhibitions Pages (`src/app/case-study/page.tsx`, `src/app/exhibitions/page.tsx`)
+*   **Case Study**: Keep existing layout; verify inline PDF preview canvas scales responsively and opens full-screen interactive PDF viewing mode.
+*   **Exhibitions**: Retain approved masonry/grid gallery layout using pictures from `public/Exibition/`.
+
+### I. About Us Page Overhaul (`src/app/about-us/page.tsx`)
+Redesign layout inspired by `https://sigmasun-technologies.vercel.app/about`:
+*   **Our Story**: Interactive visual timeline detailing Sigmasun's evolution since 2012 in Pune.
+*   **Who We Are**: Highlight engineering expertise, R&D capabilities, and custom SPM solutions.
+*   **Mission & Vision**: Redesign into sleek dual cards with `#c9a227` top borders and gold icon accents.
+*   **Trusted Industries Marquee**: Reusable horizontal marquee banner matching the homepage.
+*   **Global Conversion CTA**: Reusable high-impact bottom CTA matching the homepage footer CTA.
+
+### J. Contact Page Redesign (`src/app/contact/page.tsx`)
+Redesign Contact page matching `https://sigmasun-technologies.vercel.app/contact`:
+*   **Interactive Form**: Contact form with floating label inputs, inquiry type dropdown (SPM Machine, Automation, PCB, General), and submit confirmation animation.
+*   **Information Cards**: Distinct visual cards for Address ("Survey No. 14, Dhadage Industrial Estate, Nanded Phata, Sinhagad Road, Pune - 411041"), Direct Phone (`+91 9975956171`), Email (`info@sigmasuntechnologies.com`), and Working Hours.
+*   **Interactive Map**: Styled embedded map wrapper for the Nanded Phata Pune facility.
+
+---
+
+## 5. Coding Guidelines & Constraints
+1.  **Strict Image & Path References**: Use exact image paths and casing as defined in `.claude/docs/sigmasunupdate.md`.
+2.  **No Dummy Content**: Use real engineering titles, descriptions, and client logo assets.
+3.  **Responsive Integrity**: Ensure mega-dropdowns, card stacking, video players, and carousels scale fluidly across mobile (320px), tablet (768px), and desktop (1280px+) screens.
+4.  **TypeScript & Next.js Standard**: Keep components modular, clean, and free of lint or compilation warnings.
+
+---
+
+## 6. Success Criteria & Verification Steps
+1.  **Build Verification**: Run `npm run build` to verify there are zero compilation or TypeScript errors.
+2.  **Dev Server Verification**: Run `npm run dev` and test:
+    *   Header logo size is doubled and header text uses Inter font.
+    *   Mega-dropdown renders industry categories matching `nav-dropdown.png` design.
+    *   Homepage displays stats counter, logo marquee, how it works, project slider, testimonials, and CTA.
+    *   Applications page features card-stacking scroll and multi-media carousel.
+    *   Videos page displays top YouTube feature player and video grid below.
+    *   About Us and Contact pages match the updated design layout.
+
+

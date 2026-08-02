@@ -21,7 +21,7 @@ export const projects: Project[] = [
     client: "Cummins, U.S.A.",
     description:
       "Automated conveyor system featuring integrated potting fixtures, safety sensors, and indexing to streamline solenoid production.",
-    image: "/Application/industrial/radiator_leak_test_machine.jpeg",
+    image: "/Application/industrial/radiator-leak-test-machine.jpeg",
     tags: ["Automotive", "Electronics"],
   },
   {
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     client: "Hindustan Unilever Ltd., Haridwar",
     description:
       "High-capacity sanitary assembly line for filtration cartridges, integrating check-weighing and leak-testing.",
-    image: "/Application/Food%20%26%20pharma/foodconvory.jpeg",
+    image: "/Application/food-pharma/foodconvory.jpeg",
     tags: ["Food & Pharma"],
   },
   {
@@ -39,7 +39,7 @@ export const projects: Project[] = [
     client: "Textile Industry Pioneer",
     description:
       "High-speed textile machine automating edge folding, stitching, and roll winding for fabric rolls.",
-    image: "/Application/industrial/saree_manufacturing_machine.jpeg",
+    image: "/Application/machineversion/convery-belt-vision.jpg",
     tags: ["Textiles"],
   },
   {
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     client: "Confidential Client",
     description:
       "Multi-axis pneumatic riveting assembly featuring an indexing table for automated component feed.",
-    image: "/Application/robotswelding/Customized_Welding_RobotSystem.png",
+    image: "/Application/robotswelding/turn-table-for-automobile-1.jpg",
     tags: ["Automotive", "Electronics"],
   },
   {
@@ -66,7 +66,7 @@ export const projects: Project[] = [
     client: "Fan Motor Capacitor Manufacturer",
     description:
       "High-voltage automated screening rig for testing motor capacitor tolerance limits and capacitance values.",
-    image: "/Application/embeddedelectronic/pcb_diagram.jpg",
+    image: "/Application/embeddedelectronic/chipboard1.jpg",
     tags: ["Electronics"],
   },
   {
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     client: "Automotive Components Manufacturer",
     description:
       "High-precision hydro-pneumatic testing system checking valve leakage, flow rate, and pressure tolerance.",
-    image: "/Application/laboratoryequip/flow_measument_bench1.jpeg",
+    image: "/Application/laboratoryequip/flow-measument-bench-1.jpeg",
     tags: ["Automotive"],
   },
 ];

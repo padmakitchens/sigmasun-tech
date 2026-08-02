@@ -2,15 +2,45 @@
 
 import { useState, type FormEvent } from "react";
 
-const INQUIRY_CATEGORIES = [
-  "SPM Development",
-  "Automation Programming",
-  "Electrical Panel",
-  "Re-engineering",
-];
+const INQUIRY_TYPES = ["SPM Machine", "Automation", "PCB", "General"];
 
-const inputClasses =
-  "w-full rounded-[6px] border border-[var(--color-border)] bg-white px-4 py-3 text-sm text-[var(--color-text)] outline-none transition-all focus:border-[#F67011] focus:ring-3 focus:ring-[rgba(246,112,17,0.2)]";
+const floatingInputClasses =
+  "peer w-full rounded-[6px] border border-[var(--color-border)] bg-white px-4 pb-2 pt-5 text-sm text-[var(--color-text)] outline-none transition-all focus:border-[var(--color-accent-gold)] focus:ring-3 focus:ring-[rgba(201,162,39,0.2)]";
+
+const floatingLabelClasses =
+  "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-[var(--color-text-muted)] transition-all duration-[var(--duration-fast)] peer-focus:top-3 peer-focus:text-xs peer-focus:text-[var(--color-accent-gold)] peer-[:not(:placeholder-shown)]:top-3 peer-[:not(:placeholder-shown)]:text-xs";
+
+const MAP_QUERY = encodeURIComponent(
+  "Survey No. 14, Dhadage Industrial Estate, Nanded Phata, Sinhagad Road, Pune 411041"
+);
+
+function FloatingField({
+  id,
+  label,
+  type = "text",
+  required = false,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+}) {
+  return (
+    <div className="relative">
+      <input
+        id={id}
+        name={id}
+        type={type}
+        required={required}
+        placeholder=" "
+        className={floatingInputClasses}
+      />
+      <label htmlFor={id} className={floatingLabelClasses}>
+        {label}
+      </label>
+    </div>
+  );
+}
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -37,7 +67,7 @@ export default function ContactPage() {
         <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
           <div>
             {submitted ? (
-              <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+              <div className="animate-fade-up rounded-xl border-t-4 border-[var(--color-accent-gold)] bg-[var(--color-surface)] p-8 shadow-[var(--shadow-md)]">
                 <h2 className="text-lg font-semibold text-[var(--color-text)]">
                   Thanks &mdash; we&apos;ll be in touch.
                 </h2>
@@ -47,81 +77,46 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-1 block text-xs uppercase tracking-wide text-[var(--color-text-muted)]"
-                  >
-                    Name
-                  </label>
-                  <input id="name" name="name" type="text" required className={inputClasses} />
-                </div>
-                <div>
-                  <label
-                    htmlFor="company"
-                    className="mb-1 block text-xs uppercase tracking-wide text-[var(--color-text-muted)]"
-                  >
-                    Company Name
-                  </label>
-                  <input id="company" name="company" type="text" className={inputClasses} />
-                </div>
+                <FloatingField id="name" label="Name" required />
+                <FloatingField id="company" label="Company Name" />
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="mb-1 block text-xs uppercase tracking-wide text-[var(--color-text-muted)]"
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      className={inputClasses}
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="phone"
-                      className="mb-1 block text-xs uppercase tracking-wide text-[var(--color-text-muted)]"
-                    >
-                      Phone Number
-                    </label>
-                    <input id="phone" name="phone" type="tel" className={inputClasses} />
-                  </div>
+                  <FloatingField id="email" label="Email" type="email" required />
+                  <FloatingField id="phone" label="Phone Number" type="tel" />
                 </div>
                 <div>
                   <label
-                    htmlFor="category"
+                    htmlFor="inquiryType"
                     className="mb-1 block text-xs uppercase tracking-wide text-[var(--color-text-muted)]"
                   >
-                    Inquiry Category
+                    Inquiry Type
                   </label>
-                  <select id="category" name="category" className={inputClasses} defaultValue="">
+                  <select
+                    id="inquiryType"
+                    name="inquiryType"
+                    defaultValue=""
+                    className="w-full rounded-[6px] border border-[var(--color-border)] bg-white px-4 py-3 text-sm text-[var(--color-text)] outline-none transition-all focus:border-[var(--color-accent-gold)] focus:ring-3 focus:ring-[rgba(201,162,39,0.2)]"
+                  >
                     <option value="" disabled>
-                      Select a category
+                      Select an inquiry type
                     </option>
-                    {INQUIRY_CATEGORIES.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
+                    {INQUIRY_TYPES.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
                       </option>
                     ))}
                   </select>
                 </div>
-                <div>
-                  <label
-                    htmlFor="details"
-                    className="mb-1 block text-xs uppercase tracking-wide text-[var(--color-text-muted)]"
-                  >
-                    Details
-                  </label>
+                <div className="relative">
                   <textarea
                     id="details"
                     name="details"
                     rows={5}
-                    className={`${inputClasses} min-h-[120px] resize-y`}
+                    placeholder=" "
+                    className={`${floatingInputClasses} min-h-[120px] resize-y`}
                   />
+                  <label htmlFor="details" className={floatingLabelClasses}>
+                    Details
+                  </label>
                 </div>
                 <button
                   type="submit"
@@ -133,53 +128,65 @@ export default function ContactPage() {
             )}
           </div>
 
-          <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
-            <h2 className="text-lg font-semibold text-[var(--color-text)]">Office</h2>
-            <dl className="mt-6 flex flex-col gap-5 text-sm">
-              <div>
-                <dt className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
-                  Address
-                </dt>
-                <dd className="mt-1 text-[var(--color-text)]">
-                  Survey No. 14, Dhadage Industrial Estate, Nanded Phata, Sinhagad Road, Pune
-                  - 411041
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
-                  Phone
-                </dt>
-                <dd className="mt-1">
-                  <a
-                    href="tel:+919975956171"
-                    className="text-[var(--color-text)] hover:text-[var(--color-primary)]"
-                  >
-                    +91 9975956171
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
-                  Email
-                </dt>
-                <dd className="mt-1">
-                  <a
-                    href="mailto:info@sigmasuntechnologies.com"
-                    className="text-[var(--color-text)] hover:text-[var(--color-primary)]"
-                  >
-                    info@sigmasuntechnologies.com
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
-                  Office Timings
-                </dt>
-                <dd className="mt-1 text-[var(--color-text)]">
-                  Monday &ndash; Saturday, 9:30 AM &ndash; 6:30 PM IST
-                </dd>
-              </div>
-            </dl>
+          <div className="flex flex-col gap-6">
+            <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+              <h2 className="text-lg font-semibold text-[var(--color-text)]">Office</h2>
+              <dl className="mt-6 flex flex-col gap-5 text-sm">
+                <div>
+                  <dt className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
+                    Address
+                  </dt>
+                  <dd className="mt-1 text-[var(--color-text)]">
+                    Survey No. 14, Dhadage Industrial Estate, Nanded Phata, Sinhagad Road, Pune
+                    - 411041
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
+                    Phone
+                  </dt>
+                  <dd className="mt-1">
+                    <a
+                      href="tel:+919975956171"
+                      className="text-[var(--color-text)] hover:text-[var(--color-primary)]"
+                    >
+                      +91 9975956171
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
+                    Email
+                  </dt>
+                  <dd className="mt-1">
+                    <a
+                      href="mailto:info@sigmasuntechnologies.com"
+                      className="text-[var(--color-text)] hover:text-[var(--color-primary)]"
+                    >
+                      info@sigmasuntechnologies.com
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
+                    Office Timings
+                  </dt>
+                  <dd className="mt-1 text-[var(--color-text)]">
+                    Monday &ndash; Saturday, 9:30 AM &ndash; 6:30 PM IST
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <div className="overflow-hidden rounded-xl border border-[var(--color-border)] shadow-[var(--shadow-sm)]">
+              <iframe
+                title="Sigmasun Technologies facility map"
+                src={`https://www.google.com/maps?q=${MAP_QUERY}&output=embed`}
+                className="h-[280px] w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </div>
       </div>

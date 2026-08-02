@@ -1,10 +1,14 @@
 import fs from "fs";
 import path from "path";
-import Image from "next/image";
 import Link from "next/link";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectsCarousel from "@/components/ProjectsCarousel";
 import HeroBackgroundSlider from "@/components/HeroBackgroundSlider";
-import { projects, featuredProjectSlugs } from "@/data/projects";
+import Marquee from "@/components/Marquee";
+import StatsCounter, { type Stat } from "@/components/StatsCounter";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
+import HowItWorksStack from "@/components/HowItWorksStack";
+import { projects } from "@/data/projects";
+import { testimonials } from "@/data/testimonials";
 
 const clientLogosDir = path.join(process.cwd(), "public", "our-clients");
 const clientLogos = fs
@@ -15,6 +19,13 @@ const clientLogos = fs
     const numB = parseInt(b.match(/clients-(\d+)-/)?.[1] ?? "0", 10);
     return numA - numB;
   });
+
+const STATS: Stat[] = [
+  { value: 100, suffix: "+", label: "Custom SPM Machines Built" },
+  { value: 12, suffix: "+", label: "Years Industry Experience" },
+  { value: 50, suffix: "+", label: "Enterprise Clients" },
+  { value: 100, suffix: "%", label: "Custom Engineering & In-House R&D" },
+];
 
 const DIVISIONS = [
   {
@@ -39,7 +50,43 @@ const DIVISIONS = [
   },
 ];
 
-const featuredProjects = projects.filter((p) => featuredProjectSlugs.includes(p.slug));
+const HOW_IT_WORKS = [
+  {
+    step: "01",
+    title: "Client Consultation & Feasibility",
+    description:
+      "On-site process study and requirement gathering to scope what's actually buildable before a single drawing starts.",
+  },
+  {
+    step: "02",
+    title: "3D CAD & Controller Design",
+    description:
+      "Full mechanical CAD and electrical/controller architecture developed in-house, reviewed against your process constraints.",
+  },
+  {
+    step: "03",
+    title: "Precision Machining & PCB Fabrication",
+    description:
+      "In-house fabrication, machining, and PCB assembly, with every subsystem built and bench-tested before integration.",
+  },
+  {
+    step: "04",
+    title: "Rigorous Assembly & Testing",
+    description:
+      "Full-system assembly followed by functional, load, and safety testing against the original process requirement.",
+  },
+  {
+    step: "05",
+    title: "Turnkey Deployment & Support",
+    description:
+      "On-site commissioning, operator training, and ongoing service so the machine runs long after handover.",
+  },
+];
+
+const clientLogoItems = clientLogos.map((file) => ({
+  src: `/our-clients/${file}`,
+  alt: "Client logo",
+}));
 
 export default function Home() {
   return (
@@ -74,39 +121,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About summary */}
-      <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
-        <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-16">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wide text-[var(--color-primary)]">
-              Precision, Performance, Quality
-            </span>
-            <h2 className="mt-3 text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
-              A Pune-based engineering partner for hard problems
-            </h2>
-          </div>
-          <p className="text-base leading-relaxed text-[var(--color-text-muted)]">
-            Sigmasun Technologies builds special-purpose machines and turnkey automation
-            systems for manufacturers who can&apos;t buy what they need off a shelf. Our team
-            covers embedded systems, mechatronics, and vision inspection end-to-end &mdash;
-            mechanical fabrication, electrical wiring, controller programming, and quality
-            assurance under one roof. We also consult on import substitution, re-engineering
-            imported systems locally to cut cost and lead time for Indian manufacturers.
-          </p>
+      {/* Stats counter - full-width bar, separate from hero */}
+      <section className="w-full border-y border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-10 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-[1280px]">
+          <StatsCounter stats={STATS} />
         </div>
       </section>
 
-      {/* Business divisions */}
+      {/* Trusted by leading brands */}
+      <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <h2 className="text-center text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
+            Trusted by Leading Brands
+          </h2>
+          <div className="mt-10">
+            <Marquee items={clientLogoItems} />
+          </div>
+        </div>
+      </section>
+
+      {/* Who We Are */}
       <section className="bg-[var(--color-surface)] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
-            Business Divisions
-          </h2>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-16">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wide text-gold">
+                Precision, Performance, Quality
+              </span>
+              <h2 className="mt-3 text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
+                Who We Are
+              </h2>
+            </div>
+            <p className="text-base leading-relaxed text-[var(--color-text-muted)]">
+              Sigmasun Technologies builds special-purpose machines and turnkey automation
+              systems for manufacturers who can&apos;t buy what they need off a shelf. Our team
+              covers embedded systems, mechatronics, and vision inspection end-to-end &mdash;
+              mechanical fabrication, electrical wiring, controller programming, and quality
+              assurance under one roof from our Pune manufacturing facility. We also consult on
+              import substitution, re-engineering imported systems locally to cut cost and lead
+              time for Indian manufacturers.
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {DIVISIONS.map((division) => (
               <div
                 key={division.title}
-                className="rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-6 shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-normal)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-lg)]"
+                className="hover-lift rounded-xl border border-[var(--color-border)] bg-[var(--color-background)] p-6 shadow-[var(--shadow-sm)] border-t-2 border-t-[var(--color-accent-gold)]"
               >
                 <h3 className="text-base font-semibold text-[var(--color-text)]">
                   {division.title}
@@ -120,54 +181,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured projects */}
-      <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
+      {/* How It Works */}
+      <section className="bg-[var(--color-surface)] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-[1280px]">
-          <h2 className="text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
-            Featured Projects
+          <h2 className="text-center text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
+            How It Works
           </h2>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-primary)] px-8 py-4 text-sm font-medium uppercase tracking-wide text-[var(--color-primary)] transition-all duration-[var(--duration-fast)] hover:bg-[var(--color-surface)] hover:border-[var(--color-primary-hover)] hover:text-[var(--color-primary-hover)]"
-            >
-              View All Projects &rarr;
-            </Link>
+          <div className="mt-12">
+            <HowItWorksStack steps={HOW_IT_WORKS} />
           </div>
         </div>
       </section>
 
-      {/* Our Clients */}
-      <section className="bg-[var(--color-surface)] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
+      {/* Sliding projects showcase */}
+      <section className="bg-[#020003] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <h2 className="text-2xl font-semibold text-white lg:text-3xl">Featured Projects</h2>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-accent-gold)] px-6 py-3 text-xs font-medium uppercase tracking-wide text-[var(--color-accent-gold)] transition-all duration-[var(--duration-fast)] hover:bg-[var(--color-accent-gold)] hover:text-[#020003]"
+            >
+              View All Projects &rarr;
+            </Link>
+          </div>
+          <div className="mt-10">
+            <ProjectsCarousel projects={projects} />
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-[1280px]">
           <h2 className="text-center text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
-            Trusted by Leading Brands
+            What Our Clients Say
           </h2>
-          <div className="mt-10 grid grid-cols-3 items-center justify-items-center gap-6 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7">
-            {clientLogos.map((file) => (
-              <div
-                key={file}
-                className="relative h-16 w-full grayscale transition-all duration-[var(--duration-normal)] hover:-translate-y-0.5 hover:grayscale-0"
-              >
-                <Image
-                  src={`/our-clients/${file}`}
-                  alt="Client logo"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            ))}
+          <div className="mt-12">
+            <TestimonialCarousel testimonials={testimonials} />
           </div>
         </div>
       </section>
 
       {/* CTA band */}
-      <section className="bg-[var(--color-primary)] px-4 py-16 sm:px-6 lg:px-10">
+      <section className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent-gold)] px-4 py-16 sm:px-6 lg:px-10">
         <div className="mx-auto flex max-w-[1280px] flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
           <h2 className="max-w-xl text-2xl font-semibold text-white lg:text-3xl">
             Have a Custom Automation Requirement? Talk to our engineering specialists in

@@ -3,42 +3,43 @@
 import Image from "next/image";
 import { useState } from "react";
 import CaseStudyViewer, { type CaseStudyItem } from "@/components/CaseStudyViewer";
+import PdfThumbnail from "@/components/PdfThumbnail";
 
 const CASE_STUDIES: CaseStudyItem[] = [
   {
     type: "pdf",
     title: "Defence Systems Case Study",
-    src: "/Case%20study/defence_case_study.pdf",
+    src: "/Case-study/defence_case_study.pdf",
   },
   {
     type: "pdf",
     title: "Dam Instrumentation Case Study",
-    src: "/Case%20study/Dam_presentation_case_study.pdf",
+    src: "/Case-study/Dam_presentation_case_study.pdf",
   },
   {
     type: "pdf",
     title: "Industry 4.0 Case Study",
-    src: "/Case%20study/INDUSTRY%204.pdf",
+    src: "/Case-study/INDUSTRY%204.pdf",
   },
   {
     type: "pdf",
     title: "Oxus Generator Concentration Case Study",
-    src: "/Case%20study/oxus_generator_concentration_case_study.pdf",
+    src: "/Case-study/oxus_generator_concentration_case_study.pdf",
   },
   {
     type: "pdf",
     title: "Sigmasun Company Presentation",
-    src: "/Case%20study/sigmasun_presentation.pdf",
+    src: "/Case-study/sigmasun_presentation.pdf",
   },
   {
     type: "image",
     title: "Oxus System Assembly",
-    src: "/Case%20study/photo_80_2026-07-09_19-15-13.jpg",
+    src: "/Case-study/photo_80_2026-07-09_19-15-13.jpg",
   },
   {
     type: "image",
     title: "Oxus System Internals",
-    src: "/Case%20study/photo_81_2026-07-09_19-15-13.jpg",
+    src: "/Case-study/photo_81_2026-07-09_19-15-13.jpg",
   },
 ];
 
@@ -69,14 +70,7 @@ export default function CaseStudyPage() {
                 {cs.type === "image" ? (
                   <Image src={cs.src} alt={cs.title} fill className="object-cover" />
                 ) : (
-                  <div className="flex h-full flex-col items-center justify-center gap-2 text-[var(--color-primary)]">
-                    <svg viewBox="0 0 24 24" className="h-10 w-10" fill="currentColor">
-                      <path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h4v1.5H8V10z" />
-                    </svg>
-                    <span className="text-xs font-bold uppercase tracking-wide text-[var(--color-text-muted)]">
-                      PDF Presentation
-                    </span>
-                  </div>
+                  <PdfThumbnail src={cs.src} alt={`${cs.title} — first page preview`} />
                 )}
               </div>
               <div className="flex flex-col gap-3 p-5">

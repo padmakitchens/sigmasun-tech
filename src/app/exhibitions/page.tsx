@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Lightbox, { type LightboxItem } from "@/components/Lightbox";
 
 const EXHIBITION_IMAGES = [
   "/Exibition/exi1.jpg",
@@ -18,21 +19,14 @@ const EXHIBITION_IMAGES = [
   "/Exibition/photo_73_2026-07-09_19-15-13.jpg",
 ];
 
-export default function ExhibitionsPage() {
-  const [active, setActive] = useState<string | null>(null);
+const lightboxItems: LightboxItem[] = EXHIBITION_IMAGES.map((src) => ({
+  type: "image",
+  src,
+  title: "Sigmasun Technologies exhibition photo",
+}));
 
-  useEffect(() => {
-    if (!active) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActive(null);
-    };
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [active]);
+export default function ExhibitionsPage() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
     <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
@@ -49,11 +43,11 @@ export default function ExhibitionsPage() {
         </p>
 
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {EXHIBITION_IMAGES.map((src) => (
+          {EXHIBITION_IMAGES.map((src, i) => (
             <button
               key={src}
               type="button"
-              onClick={() => setActive(src)}
+              onClick={() => setActiveIndex(i)}
               className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-[var(--shadow-sm)] transition-transform duration-300 hover:scale-[1.03] hover:shadow-[var(--shadow-lg)]"
             >
               <Image
@@ -67,32 +61,12 @@ export default function ExhibitionsPage() {
         </div>
       </div>
 
-      {active && (
-        <div
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/85 p-4"
-          onClick={() => setActive(null)}
-        >
-          <button
-            type="button"
-            aria-label="Close"
-            onClick={() => setActive(null)}
-            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-2xl text-white hover:bg-white/20"
-          >
-            &times;
-          </button>
-          <div
-            className="relative h-[80vh] w-full max-w-4xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={active}
-              alt="Sigmasun Technologies exhibition photo, full size"
-              fill
-              className="object-contain"
-            />
-          </div>
-        </div>
-      )}
+      <Lightbox
+        items={lightboxItems}
+        index={activeIndex}
+        onClose={() => setActiveIndex(null)}
+        onNavigate={setActiveIndex}
+      />
     </section>
   );
 }
