@@ -174,7 +174,7 @@ export default function Header() {
         </Link>
 
         <nav
-          className="relative hidden items-center justify-self-center gap-6 font-[var(--font-heading)] lg:flex xl:gap-8"
+          className="relative hidden items-center justify-self-center gap-1 font-[var(--font-heading)] lg:flex xl:gap-2"
           onMouseLeave={closeSoon}
         >
           {NAV_ITEMS.map((item) => {
@@ -187,7 +187,7 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`nav-link text-sm font-medium uppercase tracking-wide ${
+                  className={`nav-link text-xs font-medium uppercase tracking-wide ${
                     isActive
                       ? "text-[var(--color-primary)]"
                       : "text-[var(--color-text)] hover:text-[var(--color-primary)]"
@@ -207,7 +207,7 @@ export default function Header() {
                   aria-expanded={isOpen}
                   aria-current={isActive ? "page" : undefined}
                   onClick={() => setOpenDropdown(null)}
-                  className={`nav-link flex items-center gap-1 text-sm font-medium uppercase tracking-wide ${
+                  className={`nav-link flex items-center gap-1 text-xs font-medium uppercase tracking-wide ${
                     isActive || isOpen
                       ? "text-[var(--color-primary)]"
                       : "text-[var(--color-text)] hover:text-[var(--color-primary)]"

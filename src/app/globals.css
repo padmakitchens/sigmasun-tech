@@ -128,7 +128,8 @@ body {
   z-index: 0;
   overflow: hidden;
   border-radius: 9999px;
-  padding: 0.55rem 0.9rem;
+  padding: 0.5rem 0.55rem;
+  white-space: nowrap;
   transition: color var(--duration-fast) var(--ease-out);
 }
 
