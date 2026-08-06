@@ -37,6 +37,8 @@ export default function SingleImageCarousel({
           src={src}
           alt={alt}
           fill
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          loading={i === 0 ? "eager" : "lazy"}
           className={`object-cover transition-opacity duration-700 ease-[var(--ease-out)] ${
             i === active ? "opacity-100" : "opacity-0"
           }`}

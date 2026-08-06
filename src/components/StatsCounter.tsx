@@ -70,7 +70,7 @@ export default function StatsCounter({ stats }: { stats: Stat[] }) {
   return (
     <div
       ref={ref}
-      className="grid grid-cols-2 divide-y divide-[var(--color-border)] sm:flex sm:divide-x sm:divide-y-0"
+      className="grid grid-cols-2 divide-y divide-[var(--color-border)] sm:flex sm:divide-x sm:divide-y-0 justify-between"
     >
       {stats.map((stat) => (
         <div key={stat.label} className="py-4 sm:py-0">

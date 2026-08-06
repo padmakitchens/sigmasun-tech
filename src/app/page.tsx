@@ -5,6 +5,7 @@ import ProjectsCarousel from "@/components/ProjectsCarousel";
 import HeroBackgroundSlider from "@/components/HeroBackgroundSlider";
 import Marquee from "@/components/Marquee";
 import StatsCounter, { type Stat } from "@/components/StatsCounter";
+import IndustryLogosMarquee from "@/components/IndustryLogosMarquee";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import HowItWorksStack from "@/components/HowItWorksStack";
 import { projects } from "@/data/projects";
@@ -121,21 +122,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats counter - full-width bar, separate from hero */}
-      <section className="w-full border-y border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-10 sm:px-6 lg:px-10">
-        <div className="mx-auto max-w-[1280px]">
-          <StatsCounter stats={STATS} />
-        </div>
-      </section>
-
-      {/* Trusted by leading brands */}
-      <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
+      {/* Industry logos */}
+      <section className="px-4 py-14 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-[1280px]">
           <h2 className="text-center text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
-            Trusted by Leading Brands
+            Industries We Serve
           </h2>
-          <div className="mt-10">
-            <Marquee items={clientLogoItems} />
+          <div className="mt-8">
+            <IndustryLogosMarquee />
           </div>
         </div>
       </section>
@@ -181,6 +175,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trusted by leading brands */}
+      <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
+        <div className="mx-auto max-w-[1280px]">
+          <h2 className="text-center text-2xl font-semibold text-[var(--color-text)] lg:text-3xl">
+            Trusted by Leading Brands
+          </h2>
+          <div className="mt-10">
+            <Marquee items={clientLogoItems} />
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
       <section className="bg-[var(--color-surface)] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-[1280px]">
@@ -190,6 +196,13 @@ export default function Home() {
           <div className="mt-12">
             <HowItWorksStack steps={HOW_IT_WORKS} />
           </div>
+        </div>
+      </section>
+
+      {/* Stats counter - full-width bar, above Featured Projects */}
+      <section className="w-full border-y border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-10 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-[1280px]">
+          <StatsCounter stats={STATS} />
         </div>
       </section>
 

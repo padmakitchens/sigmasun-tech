@@ -1,13 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const VERTICALS = [
-  "Special Purpose Machines",
-  "Industrial Automation",
-  "Mechatronics",
-  "Embedded Systems",
-  "HT/LT Electrical Panels",
-];
+import { industries } from "@/data/industries";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
@@ -43,9 +36,14 @@ export default function Footer() {
                 Business Verticals
               </h3>
               <ul className="mt-4 flex flex-col gap-2.5">
-                {VERTICALS.map((v) => (
-                  <li key={v} className="text-sm text-white/70">
-                    {v}
+                {industries.map((industry) => (
+                  <li key={industry.slug}>
+                    <Link
+                      href={`/applications/${encodeURIComponent(industry.slug)}`}
+                      className="text-sm text-white/70 transition-colors duration-[var(--duration-fast)] hover:text-[var(--color-primary)]"
+                    >
+                      {industry.title}
+                    </Link>
                   </li>
                 ))}
               </ul>

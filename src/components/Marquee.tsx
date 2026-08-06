@@ -16,7 +16,13 @@ export default function Marquee({ items }: { items: MarqueeItem[] }) {
             key={`${item.src}-${i}`}
             className="relative h-20 w-40 shrink-0 transition-transform duration-[var(--duration-normal)] hover:scale-105 sm:h-24 sm:w-48"
           >
-            <Image src={item.src} alt={item.alt} fill className="object-contain" />
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              sizes="(min-width: 640px) 192px, 160px"
+              className="object-contain"
+            />
           </div>
         ))}
       </div>

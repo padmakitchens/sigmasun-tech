@@ -6,11 +6,14 @@ import { projects, type ProjectTag } from "@/data/projects";
 
 const FILTERS: ("Show All" | ProjectTag)[] = [
   "Show All",
-  "Medical",
-  "Automotive",
-  "Textiles",
-  "Electronics",
-  "Food & Pharma",
+  "Embedded Electronic",
+  "Health Care",
+  "Information Technology",
+  "Automobile",
+  "Laboratory",
+  "Industrial Development",
+  "Robotics",
+  "Defence System",
 ];
 
 export default function ProjectsPage() {

@@ -5,6 +5,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { applications } from "@/data/applications";
+import {
+  Plane,
+  FlaskConical,
+  Zap,
+  Network,
+  Waves,
+  HeartPulse,
+  ShieldHalf,
+  CircuitBoard,
+  Bot,
+  Hand,
+  Pill,
+  Factory,
+  ScanEye,
+  Cog,
+  type LucideIcon,
+} from "lucide-react";
 
 type NavItem =
   | { kind: "link"; label: string; href: string }
@@ -49,10 +66,31 @@ const MANUFACTURING_GROUPS = [
   },
 ];
 
-function DropdownIcon({ letter }: { letter: string }) {
+const APPLICATION_ICONS: Record<string, LucideIcon> = {
+  aeronautic: Plane,
+  laboratoryequip: FlaskConical,
+  lasermarkingsystem: Zap,
+  industry4: Network,
+  dam: Waves,
+  healthcare: HeartPulse,
+  defensesystem: ShieldHalf,
+  embeddedelectronic: CircuitBoard,
+  robotswelding: Bot,
+  robotspick: Hand,
+  "food-pharma": Pill,
+  industrial: Factory,
+  machineversion: ScanEye,
+};
+
+const MANUFACTURING_ICONS: Record<string, LucideIcon> = {
+  "Embedded Electronics Facility": CircuitBoard,
+  "Mechanical Facility": Cog,
+};
+
+function DropdownIcon({ icon: Icon }: { icon: LucideIcon }) {
   return (
-    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[var(--color-accent-gold)]/10 text-sm font-bold text-[var(--color-accent-gold)]">
-      {letter}
+    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[var(--color-accent-gold)]/10 text-[var(--color-accent-gold)]">
+      <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
     </span>
   );
 }
@@ -106,7 +144,7 @@ export default function Header() {
         scrolled ? "shadow-[var(--shadow-sm)]" : ""
       }`}
     >
-      <div className="mx-auto grid h-full max-w-[1400px] grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-12">
+      <div className="grid h-full w-full grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-10 xl:px-16">
         <Link href="/" className="logo-group flex items-center gap-2 justify-self-start">
           <Image
             src="/sigmasunlogo.webp"
@@ -149,7 +187,7 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`nav-link text-xs font-medium uppercase tracking-wide transition-colors duration-[var(--duration-fast)] ${
+                  className={`nav-link text-sm font-medium uppercase tracking-wide ${
                     isActive
                       ? "text-[var(--color-primary)]"
                       : "text-[var(--color-text)] hover:text-[var(--color-primary)]"
@@ -164,11 +202,12 @@ export default function Header() {
 
             return (
               <div key={item.id} onMouseEnter={() => openNow(item.id)}>
-                <button
-                  type="button"
+                <Link
+                  href={item.href}
                   aria-expanded={isOpen}
-                  onClick={() => setOpenDropdown((v) => (v === item.id ? null : item.id))}
-                  className={`nav-link flex items-center gap-1 text-xs font-medium uppercase tracking-wide transition-colors duration-[var(--duration-fast)] ${
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={() => setOpenDropdown(null)}
+                  className={`nav-link flex items-center gap-1 text-sm font-medium uppercase tracking-wide ${
                     isActive || isOpen
                       ? "text-[var(--color-primary)]"
                       : "text-[var(--color-text)] hover:text-[var(--color-primary)]"
@@ -182,7 +221,7 @@ export default function Header() {
                   >
                     &#9660;
                   </span>
-                </button>
+                </Link>
               </div>
             );
           })}
@@ -251,7 +290,7 @@ export default function Header() {
                         onClick={() => setOpenDropdown(null)}
                         className="group flex items-start gap-3 rounded-md p-1.5 normal-case transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-accent-gold)]/10"
                       >
-                        <DropdownIcon letter={app.title.charAt(0)} />
+                        <DropdownIcon icon={APPLICATION_ICONS[app.slug] ?? Factory} />
                         <span className="flex flex-col">
                           <span className="text-sm font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)]">
                             {app.title}
@@ -286,7 +325,7 @@ export default function Header() {
                         onClick={() => setOpenDropdown(null)}
                         className="group flex items-start gap-3 rounded-md p-1.5 normal-case transition-colors duration-[var(--duration-fast)] hover:bg-[var(--color-accent-gold)]/10"
                       >
-                        <DropdownIcon letter={sub.title.charAt(0)} />
+                        <DropdownIcon icon={MANUFACTURING_ICONS[sub.title] ?? Cog} />
                         <span className="flex flex-col">
                           <span className="text-sm font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)]">
                             {sub.title}
