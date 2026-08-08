@@ -194,6 +194,65 @@ body {
   animation-play-state: paused;
 }
 
+/* ---------------------------------------------------------------------------
+   Hero V1 — preview at /hero-lab/v1
+   All selectors are hero-v1- prefixed so nothing existing is affected.
+   These layers exist to art-direct the shop-floor photography we have:
+   phone snapshots with flat fluorescent light and cluttered edges.
+   --------------------------------------------------------------------------- */
+
+/* Grade: kills the green epoxy floor and the fluorescent cast. */
+.hero-v1-grade {
+  filter: grayscale(0.55) contrast(1.15) brightness(0.58) saturate(0.9);
+}
+
+/* Duotone: pulls four photos shot in four different rooms into one palette.
+   mix-blend-mode: color keeps luminance and replaces hue only. */
+.hero-v1-duotone {
+  background: linear-gradient(160deg, #0a1420 0%, #1b1a24 45%, #2a1405 100%);
+  mix-blend-mode: color;
+  opacity: 0.66;
+}
+
+/* Film grain. Cheapest way to make a snapshot read as intentional. */
+.hero-v1-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+
+/* Slow gear outline in the CAD layer; reuses the logo's gear-spin keyframe. */
+.hero-v1-gear {
+  animation: gear-spin 90s linear infinite;
+  transform-origin: center;
+}
+
+/* Pagination gauge: fills across the slide's dwell time. Shared by all
+   hero versions — the track colour changes, the mechanic doesn't. */
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.hero-progress-fill {
+  transform-origin: left;
+  animation: hero-progress var(--hero-dwell, 7000ms) linear both;
+}
+
+.hero-progress-fill[data-paused="true"] {
+  animation-play-state: paused;
+}
+
+/* Hero V2 (light) — photography is shown honestly here, so this is a
+   gentle print-style lift rather than V1's heavy dark grade. */
+.hero-v2-grade {
+  filter: contrast(1.06) saturate(0.92) brightness(1.02);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
