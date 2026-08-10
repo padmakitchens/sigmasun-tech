@@ -253,6 +253,38 @@ body {
   filter: contrast(1.06) saturate(0.92) brightness(1.02);
 }
 
+/* Hero V4 — bubble cards. Continuous, subtle scale oscillation around a
+   per-card base size, so the grid reads as a loosely "breathing" field
+   instead of a rigid table. Amplitude is kept small (a few percent) so
+   neighbouring cards never collide. Values come in as CSS custom
+   properties set inline per card (see hero-v4/HeroV4.tsx) so one keyframe
+   serves all eight with different size, speed and phase.
+   The global prefers-reduced-motion rule below already collapses this to
+   0.01ms, so no extra JS is needed to respect it. */
+@keyframes hero-v4-breathe {
+  0%,
+  100% {
+    transform: scale(var(--hv4-scale-base, 1));
+  }
+  50% {
+    transform: scale(var(--hv4-scale-peak, 1.03));
+  }
+}
+
+.hero-v4-bubble {
+  animation: hero-v4-breathe var(--hv4-duration, 8s) var(--ease-in-out) infinite;
+  animation-delay: var(--hv4-delay, 0s);
+  will-change: transform;
+}
+
+/* Pausing on interaction reads as the bubble "settling" for you, distinct
+   from the carousel autoplay-must-never-pause rule elsewhere in this repo —
+   there autoplay is the content; here the motion is purely decorative. */
+.hero-v4-bubble:hover,
+.hero-v4-bubble:focus-visible {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

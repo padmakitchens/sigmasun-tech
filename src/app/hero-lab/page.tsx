@@ -26,6 +26,18 @@ const VERSIONS = [
     note: "No carousel. One fixed statement and CTA at the left, the eight industries as a linked card grid at the right in place of photography. Nothing rotates, nothing is hidden, and the hero ships zero JavaScript.",
     ready: true,
   },
+  {
+    href: "/hero-lab/v4",
+    label: "V4 — Breathing Bubble Grid",
+    note: "Same static idea as V3, but each of the eight cards carries its own subtle, continuous scale pulse — a different size, speed and phase per card, so the grid feels alive. Also static, also zero client JavaScript.",
+    ready: true,
+  },
+  {
+    href: "/hero-lab/v5",
+    label: "V5 — Video Carousel",
+    note: "Same carousel mechanic as V1 (4 slides, 7s dwell, 800ms crossfade, gauge pagination) but full-bleed looping video across all four AI-generated clips instead of graded photography. Copy stays centred, since the footage is centre-framed rather than lit to one side.",
+    ready: true,
+  },
 ];
 
 export default function HeroLabPage() {
